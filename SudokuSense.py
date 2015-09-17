@@ -3,6 +3,20 @@ __author__ = 'jonas'
 # My new project :)
 from gi.repository import Gtk, Gio
 
+class NumPad(Gtk.Box):
+    def __init__(self):
+        Gtk.Box.__init__(self)
+        grid = Gtk.Grid()
+        grid.set_row_spacing(3)
+        grid.set_column_spacing(3)
+        for i in range(1,4):
+            for j in range(1,4):
+                button = Gtk.Button(label = 3 * (j-1) + i)
+                grid.attach(button,i,j,1,1)
+
+        button = Gtk.Button(label = "-")
+        grid.attach(button,2,5,1,1)
+        self.add(grid)
 
 class Tile(Gtk.Button):
 
@@ -57,8 +71,8 @@ class SudokuSenseWindow(Gtk.Window):
         self.add(MainGrid)
 
         TileGrid = Gtk.Grid()
-        TileGrid.set_row_spacing(2)
-        TileGrid.set_column_spacing(2)
+        TileGrid.set_row_spacing(3)
+        TileGrid.set_column_spacing(3)
         MainGrid.add(TileGrid)
 
         for i in range(1, 4):
@@ -67,8 +81,8 @@ class SudokuSenseWindow(Gtk.Window):
                 TileGrid.attach(square,i,j,1,1)
 
         ButtonGrid = Gtk.Grid()
-        ButtonGrid.set_row_spacing(2)
-        ButtonGrid.set_column_spacing(2)
+        ButtonGrid.set_row_spacing(8)
+        ButtonGrid.set_column_spacing(3)
         MainGrid.add(ButtonGrid)
 
         button_list_tiles = Gtk.Button(label = "List tiles")
@@ -83,6 +97,9 @@ class SudokuSenseWindow(Gtk.Window):
 
         button_setup = Gtk.Button(label = "Done")
         ButtonGrid.attach(button_setup,1,3,1,1)
+
+        numPad = NumPad()
+        ButtonGrid.attach(numPad,1,4,1,1)
 
     def on_clicked_list(self, widget):
         print(self.tiles)
