@@ -34,6 +34,7 @@ class Tile(Gtk.Button):
 
     def __init__(self, tileText, posx, posy, win):
         Gtk.Button.__init__(self)
+        self.set_alignment(0,0)
         self.set_label(tileText)
         self.position = (posx, posy)
         self.numpad = win.numpad
@@ -44,6 +45,8 @@ class Tile(Gtk.Button):
 
     def on_clicked(self, widget):
         widget.set_label(self.numpad.currentSymbol)
+        (ax, ay) = widget.get_alignment()
+        print("AX: %  AY: %", ax, ay)
         # print(self.numpad.currentSymbol)
         # print(self)
         # print(widget)
@@ -55,6 +58,8 @@ class Square(Gtk.Box):
     def __init__(self, offx, offy, win):
         Gtk.Box.__init__(self)
         grid = Gtk.Grid()
+        grid.set_row_spacing(3)
+        grid.set_column_spacing(3)
         for i in range(1,4):
             for j in range(1,4):
                 tile = Tile("-",3 * (offx - 1) + i, 3 * (offy - 1) + j, win)
