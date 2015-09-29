@@ -13,6 +13,7 @@ class Sudoku():
 
     def get_tile(self,x,y):
         pass
+        #TODO fix this
         #print("Sudoku gettile")
 
     def set_tile(self,x,y):
